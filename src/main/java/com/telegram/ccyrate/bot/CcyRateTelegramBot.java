@@ -5,12 +5,18 @@ import com.telegram.ccyrate.bot.service.SendBotMessageServiceImpl;
 import lombok.AllArgsConstructor;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import com.telegram.ccyrate.bot.config.BotConfig;
+import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
+import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.telegram.ccyrate.bot.command.CommandName.*;
 
@@ -25,14 +31,16 @@ public class CcyRateTelegramBot extends TelegramLongPollingBot {
 
     private static final String COMMAND_PREFIX = "/";
 
-    @Autowired
-    private BotConfig botConfig;
-
     private final CommandContainer commandContainer;
 
+    private BotConfig botConfig;
 
     public CcyRateTelegramBot() {
         this.commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this));
+
+        botConfig = ApplicationContextProvider.getApplicationContext().getBean(BotConfig.class);
+
+        createBotMenu();
     }
 
     @Override
@@ -59,6 +67,20 @@ public class CcyRateTelegramBot extends TelegramLongPollingBot {
     @Override
     public String getBotToken() {
         return botConfig.getToken();
+    }
+
+    private void createBotMenu() {
+        List<BotCommand> commandList = new ArrayList<>();
+        commandList.add(new BotCommand(START.getCommandName(), "start bot"));
+        commandList.add(new BotCommand(STOP.getCommandName(), "stop bot"));
+        commandList.add(new BotCommand(SHOW.getCommandName(), "get rate for currency UAH/USD"));
+        commandList.add(new BotCommand(HELP.getCommandName(), "command description"));
+
+        try {
+            execute(new SetMyCommands(commandList, new BotCommandScopeDefault(), null));
+        } catch (TelegramApiException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

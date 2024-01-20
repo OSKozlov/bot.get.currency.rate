@@ -3,9 +3,7 @@ package com.telegram.ccyrate.bot.command;
 import com.telegram.ccyrate.bot.model.UahToForeignCcyModel;
 import com.telegram.ccyrate.bot.service.RateService;
 import com.telegram.ccyrate.bot.service.SendBotMessageService;
-import com.telegram.ccyrate.bot.state.BotState;
 import com.telegram.ccyrate.bot.state.BotStateMgr;
-import com.telegram.ccyrate.bot.state.StartState;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.math.BigDecimal;
@@ -26,8 +24,7 @@ public class ShowCommand implements Command {
 
     @Override
     public void execute(Update update) {
-        BotState state = BotStateMgr.getInstance().getState();
-        if (!(state instanceof StartState)) {
+        if (!BotStateMgr.getInstance().isBotStarted()) {
             return;
         }
 

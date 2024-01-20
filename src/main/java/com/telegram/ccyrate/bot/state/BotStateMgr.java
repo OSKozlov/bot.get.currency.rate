@@ -24,4 +24,8 @@ public class BotStateMgr {
     public BotState getState() {
         return currentState;
     }
+
+    public boolean isBotStarted() {
+        return currentState instanceof StartState;
+    }
 }

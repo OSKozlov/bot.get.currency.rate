@@ -4,14 +4,20 @@ import com.telegram.ccyrate.bot.CcyRateTelegramBot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
+import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
+import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.telegram.ccyrate.bot.command.CommandName.*;
+import static com.telegram.ccyrate.bot.command.CommandName.HELP;
 
 public class SendBotMessageServiceImpl implements SendBotMessageService {
 
@@ -30,12 +36,7 @@ public class SendBotMessageServiceImpl implements SendBotMessageService {
         sendMessage.setChatId(chatId);
         sendMessage.enableHtml(true);
         sendMessage.setText(message);
-
-        try {
-            ccyRateTelegramBot.execute(sendMessage);
-        } catch (TelegramApiException e) {
-            logger.error("Error has occured while sending a message to telegram chat...");
-        }
+        send(sendMessage);
     }
 
     @Override
@@ -59,12 +60,7 @@ public class SendBotMessageServiceImpl implements SendBotMessageService {
         sendMessage.setChatId(chatId);
         sendMessage.setText(message);
         sendMessage.setReplyMarkup(inlineKeyboardMarkup);
-
-        try {
-            ccyRateTelegramBot.execute(sendMessage);
-        } catch (TelegramApiException e) {
-            logger.error("Error has occured while sending a message to telegram chat...");
-        }
+        send(sendMessage);
     }
 
     @Override
@@ -72,10 +68,14 @@ public class SendBotMessageServiceImpl implements SendBotMessageService {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setText(callbackQuery.getData());
         sendMessage.setChatId(callbackQuery.getMessage().getChatId());
+        send(sendMessage);
+    }
+
+    private void send(SendMessage sendMessage) {
         try {
             ccyRateTelegramBot.execute(sendMessage);
         } catch (TelegramApiException e) {
-            logger.error("Error has occured while sending a callback message...");
+            logger.error("Error has occured while sending a message to telegram chat...");
         }
     }
 }

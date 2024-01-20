@@ -1,13 +1,11 @@
 package com.telegram.ccyrate.bot.service;
 
-import com.telegram.ccyrate.bot.config.BotConfig;
 import com.telegram.ccyrate.bot.model.UahToForeignCcyModel;
 import com.telegram.ccyrate.bot.util.JsonReader;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
