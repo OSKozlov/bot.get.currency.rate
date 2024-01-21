@@ -22,6 +22,7 @@ public class CommandContainer {
         commandMap.put(SHOW.getCommandName(), new ShowCommand(sendBotMessageService,
                                               new CcyRateService()));
         commandMap.put(CALLBACK.getCommandName(), new CallbackCommand(sendBotMessageService));
+        commandMap.put(CREATEMENU.getCommandName(), new CreateMenuCommand(sendBotMessageService));
 
         unknownCommand = new UnknownCommand(sendBotMessageService);
     }

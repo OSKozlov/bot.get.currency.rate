@@ -16,8 +16,6 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.telegram.ccyrate.bot.command.CommandName.*;
-import static com.telegram.ccyrate.bot.command.CommandName.HELP;
 
 public class SendBotMessageServiceImpl implements SendBotMessageService {
 
@@ -69,6 +67,15 @@ public class SendBotMessageServiceImpl implements SendBotMessageService {
         sendMessage.setText(callbackQuery.getData());
         sendMessage.setChatId(callbackQuery.getMessage().getChatId());
         send(sendMessage);
+    }
+
+    @Override
+    public void sendCreateMenuMessage(List<BotCommand> commandList) {
+        try {
+            ccyRateTelegramBot.execute(new SetMyCommands(commandList, new BotCommandScopeDefault(), null));
+        } catch (TelegramApiException e) {
+            logger.error("Error has occured while sending a message to telegram chat...");
+        }
     }
 
     private void send(SendMessage sendMessage) {

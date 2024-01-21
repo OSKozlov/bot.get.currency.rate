@@ -10,7 +10,8 @@ public enum CommandName {
     HELP("/help"),
     NO("/no"),
     SHOW("/show"),
-    CALLBACK("/callback");
+    CALLBACK("/callback"),
+    CREATEMENU("/createmenu");
 
     private final String commandName;
 
