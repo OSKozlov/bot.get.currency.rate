@@ -23,8 +23,5 @@ public class StartCommand implements Command {
         sendBotMessageService.sendMessage(update.getMessage().getChatId().toString(), MESSAGE_START);
 
         BotStateMgr.getInstance().setState(new StartState());
-
-//        sendBotMessageService.sendInlineKeyBoardMessage(update.getMessage().getChatId().toString(),
-//                "Choose currency pair...");
     }
 }
