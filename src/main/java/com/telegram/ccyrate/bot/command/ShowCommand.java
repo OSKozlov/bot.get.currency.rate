@@ -28,12 +28,17 @@ public class ShowCommand implements Command {
             return;
         }
 
-        String messageText = update.getMessage().getText().trim();
-        String ccy = messageText.split(" ")[1].toUpperCase();
+        String ccy = retrieveDataFromMessage(update.hasMessage() ? update.getMessage().getText() : update.getCallbackQuery().getData());
         Map<String, UahToForeignCcyModel> map = rateService.getUahToForeignCcyRates();
         UahToForeignCcyModel model = map.get(ccy);
         BigDecimal rate = model.getAmount();
-        sendBotMessageService.sendMessage(update.getMessage().getChatId().toString(),
-                MESSAGE_CURRENCY_EXCHANGE + rate.toString());
+        String chatId = update.hasMessage() ? update.getMessage().getChatId().toString() :
+                update.getCallbackQuery().getMessage().getChatId().toString();
+        sendBotMessageService.sendMessage(chatId,MESSAGE_CURRENCY_EXCHANGE + rate.toString());
+    }
+
+    private String retrieveDataFromMessage(String message) {
+        String messageText = message.trim();
+        return messageText.split(" ")[1].toUpperCase();
     }
 }

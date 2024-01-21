@@ -47,7 +47,13 @@ public class CcyRateTelegramBot extends TelegramLongPollingBot {
                 commandContainer.retrieveCommand(NO.getCommandName()).execute(update);
             }
         } else if (update.hasCallbackQuery()) {
-            commandContainer.retrieveCommand(CALLBACK.getCommandName()).execute(update);
+            String callBackData = update.getCallbackQuery().getData();
+            if (callBackData.startsWith(COMMAND_PREFIX)){
+                String commandIdentifier = callBackData.split(" ")[0].toLowerCase();
+                commandContainer.retrieveCommand(commandIdentifier).execute(update);
+            } else {
+                commandContainer.retrieveCommand(CALLBACK.getCommandName()).execute(update);
+            }
         }
     }
 

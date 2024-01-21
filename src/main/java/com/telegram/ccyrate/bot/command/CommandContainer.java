@@ -23,6 +23,8 @@ public class CommandContainer {
                                               new CcyRateService()));
         commandMap.put(CALLBACK.getCommandName(), new CallbackCommand(sendBotMessageService));
         commandMap.put(CREATEMENU.getCommandName(), new CreateMenuCommand(sendBotMessageService));
+        commandMap.put(TOPCCYLIST.getCommandName(), new TopCcyListCommand(sendBotMessageService,
+                new CcyRateService()));
 
         unknownCommand = new UnknownCommand(sendBotMessageService);
     }

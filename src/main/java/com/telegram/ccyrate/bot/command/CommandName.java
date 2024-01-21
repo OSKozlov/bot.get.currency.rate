@@ -11,7 +11,8 @@ public enum CommandName {
     NO("/no"),
     SHOW("/show"),
     CALLBACK("/callback"),
-    CREATEMENU("/createmenu");
+    CREATEMENU("/createmenu"),
+    TOPCCYLIST("/topccylist");
 
     private final String commandName;
 

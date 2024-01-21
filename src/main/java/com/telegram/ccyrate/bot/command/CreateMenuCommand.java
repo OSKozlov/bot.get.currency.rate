@@ -23,6 +23,7 @@ public class CreateMenuCommand implements Command {
         List<BotCommand> commandList = new ArrayList<>();
         commandList.add(new BotCommand(START.getCommandName(), "start bot"));
         commandList.add(new BotCommand(STOP.getCommandName(), "stop bot"));
+        commandList.add(new BotCommand(TOPCCYLIST.getCommandName(), "currency list"));
         commandList.add(new BotCommand(HELP.getCommandName(), "command description"));
 
         sendBotMessageService.sendCreateMenuMessage(commandList);
