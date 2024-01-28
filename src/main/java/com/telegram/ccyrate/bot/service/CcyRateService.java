@@ -1,5 +1,7 @@
 package com.telegram.ccyrate.bot.service;
 
+import com.telegram.ccyrate.bot.ApplicationContextProvider;
+import com.telegram.ccyrate.bot.config.BotConfig;
 import com.telegram.ccyrate.bot.model.UahToForeignCcyModel;
 import com.telegram.ccyrate.bot.util.JsonReader;
 import org.json.JSONArray;
@@ -21,11 +23,17 @@ public class CcyRateService implements RateService {
 
     private final Logger logger = LoggerFactory.getLogger(CcyRateService.class);
 
+    private BotConfig botConfig;
+
+    public CcyRateService() {
+        botConfig = ApplicationContextProvider.getApplicationContext().getBean(BotConfig.class);
+    }
+
     @Override
     public Map<String, UahToForeignCcyModel> getUahToForeignCcyRates() {
         try {
             List<UahToForeignCcyModel> uahToForeignCcyModelList = new ArrayList<>();
-            JSONArray jsonArray = JsonReader.readJsonFromUrl("https://bank.gov.ua/NBU_Exchange/exchange?json");
+            JSONArray jsonArray = JsonReader.readJsonFromUrl(botConfig.getUahToForeignCcyRateRef());
             for(int i = 0; i < jsonArray.length(); i++) {
                 JSONObject item = jsonArray.getJSONObject(i);
                 UahToForeignCcyModel model = new UahToForeignCcyModel();
