@@ -5,11 +5,14 @@ import com.telegram.ccyrate.bot.state.BotStateMgr;
 import com.telegram.ccyrate.bot.state.StopState;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+/**
+ * Implementation of Stop command {@link Command}
+ */
 public class StopCommand implements Command {
 
     private final SendBotMessageService sendBotMessageService;
 
-    public static final String STOP_MESSAGE = "Deactivated...";
+    public static final String STOP_MESSAGE = "Bot deactivated...";
 
     public StopCommand(SendBotMessageService sendBotMessageService) {
         this.sendBotMessageService = sendBotMessageService;

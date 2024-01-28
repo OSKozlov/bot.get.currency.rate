@@ -10,6 +10,9 @@ import java.util.List;
 import static com.telegram.ccyrate.bot.command.CommandName.*;
 import static com.telegram.ccyrate.bot.command.CommandName.HELP;
 
+/**
+ * Implementation of CreateMenu command {@link Command}
+ */
 public class CreateMenuCommand implements Command {
 
     private final SendBotMessageService sendBotMessageService;

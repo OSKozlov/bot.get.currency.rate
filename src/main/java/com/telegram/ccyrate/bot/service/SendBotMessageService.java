@@ -6,14 +6,40 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 
 import java.util.List;
 
+/**
+ * Service for sending messages via telegram-bot.
+ */
 public interface SendBotMessageService {
 
+    /**
+     * Send message via telegram bot.
+     *
+     * @param chatId provided chatId in which messages would be sent.
+     * @param message provided message to be sent.
+     */
     void sendMessage(String chatId, String message);
 
+    /**
+     * Send message with inline keyboard via telegram bot.
+     *
+     * @param chatId provided chatId in which messages would be sent.
+     * @param message provided message to be sent.
+     * @param inlineKeyboardMarkup provided keyBoard for telegram bot.
+     */
     void sendInlineKeyBoardMessage(String chatId, String message, InlineKeyboardMarkup inlineKeyboardMarkup);
 
+    /**
+     * Send message via telegram bot.
+     *
+     * @param callbackQuery provided incoming callback query from a callback button in an inline keyboard.
+     */
     void sendCallbackMessage(CallbackQuery callbackQuery);
 
+    /**
+     * Send create menu message via telegram bot
+     *
+     * @param commandList - menu commands list for telegram menu.
+     */
     void sendCreateMenuMessage(List<BotCommand> commandList);
 
 }

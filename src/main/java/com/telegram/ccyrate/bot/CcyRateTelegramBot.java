@@ -38,22 +38,9 @@ public class CcyRateTelegramBot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
-            String messageText = update.getMessage().getText().trim();
-            if (messageText.startsWith(COMMAND_PREFIX)) {
-                String commandIdentifier = messageText.split(" ")[0].toLowerCase();
-                commandContainer.retrieveCommand(commandIdentifier).execute(update);
-                logger.info(" Command " + messageText + " performed...");
-            } else {
-                commandContainer.retrieveCommand(NO.getCommandName()).execute(update);
-            }
+            handleReceivedMessage(update);
         } else if (update.hasCallbackQuery()) {
-            String callBackData = update.getCallbackQuery().getData();
-            if (callBackData.startsWith(COMMAND_PREFIX)){
-                String commandIdentifier = callBackData.split(" ")[0].toLowerCase();
-                commandContainer.retrieveCommand(commandIdentifier).execute(update);
-            } else {
-                commandContainer.retrieveCommand(CALLBACK.getCommandName()).execute(update);
-            }
+            handleReceivedCallback(update);
         }
     }
 
@@ -65,5 +52,26 @@ public class CcyRateTelegramBot extends TelegramLongPollingBot {
     @Override
     public String getBotToken() {
         return botConfig.getToken();
+    }
+
+    private void handleReceivedMessage(Update update) {
+        String messageText = update.getMessage().getText().trim();
+        if (messageText.startsWith(COMMAND_PREFIX)) {
+            String commandIdentifier = messageText.split(" ")[0].toLowerCase();
+            commandContainer.retrieveCommand(commandIdentifier).execute(update);
+            logger.info(" Command " + messageText + " performed...");
+        } else {
+            commandContainer.retrieveCommand(NO.getCommandName()).execute(update);
+        }
+    }
+
+    private void handleReceivedCallback(Update update) {
+        String callBackData = update.getCallbackQuery().getData();
+        if (callBackData.startsWith(COMMAND_PREFIX)){
+            String commandIdentifier = callBackData.split(" ")[0].toLowerCase();
+            commandContainer.retrieveCommand(commandIdentifier).execute(update);
+        } else {
+            commandContainer.retrieveCommand(CALLBACK.getCommandName()).execute(update);
+        }
     }
 }

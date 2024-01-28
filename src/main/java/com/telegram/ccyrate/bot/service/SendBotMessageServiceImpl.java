@@ -14,7 +14,9 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.List;
 
-
+/**
+ * Implementation of {@link SendBotMessageService} interface.
+ */
 public class SendBotMessageServiceImpl implements SendBotMessageService {
 
     private final Logger logger = LoggerFactory.getLogger(SendBotMessageServiceImpl.class);

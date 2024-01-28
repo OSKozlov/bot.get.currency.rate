@@ -5,17 +5,21 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 import static com.telegram.ccyrate.bot.command.CommandName.*;
 
+/**
+ * Implementation of Help command {@link Command}
+ */
 public class HelpCommand implements Command {
 
     private final SendBotMessageService sendBotMessageService;
 
-    public static final String HELP_MESSAGE = String.format("✨<b>Дотупные команды</b>✨\n\n"
+    public static final String HELP_MESSAGE = String.format("✨<b>Available commands</b>✨\n\n"
 
-                    + "<b>Начать\\закончить работу с ботом</b>\n"
-                    + "%s - начать работу со мной\n"
-                    + "%s - приостановить работу со мной\n\n"
-                    + "%s - получить помощь в работе со мной\n",
-            START.getCommandName(), STOP.getCommandName(), HELP.getCommandName());
+                    + "<b>Start\\end work with the bot</b>\n"
+                    + "%s - start working with me\n"
+                    + "%s - suspend working with me\n"
+                    + "%s - show rate for currency pair (for instance: /show USD)\n"
+                    + "%s - get help working with me\n",
+            START.getCommandName(), STOP.getCommandName(), SHOW.getCommandName(), HELP.getCommandName());
 
     public HelpCommand(SendBotMessageService sendBotMessageService) {
         this.sendBotMessageService = sendBotMessageService;

@@ -5,6 +5,9 @@ import com.telegram.ccyrate.bot.state.BotStateMgr;
 import com.telegram.ccyrate.bot.state.StartState;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+/**
+ * Implementation of Start command {@link Command}
+ */
 public class StartCommand implements Command {
 
     private static final String MESSAGE_START = "Hi, nice to meet you!" + "\n" +
