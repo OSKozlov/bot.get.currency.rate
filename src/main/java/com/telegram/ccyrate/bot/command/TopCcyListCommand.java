@@ -23,9 +23,8 @@ public class TopCcyListCommand implements Command {
 
     private static final List TOP_CURRENCIES = Arrays.asList("USD","EUR","GBP","PLN","CHF");
 
-    private static final String MESSAGE_CURRENCY_EXCHANGE = "Please choose currency pair: ";
-
-    public static final String BOT_IS_NOT_AVAILABLE_MESSAGE = "Please start bot first via invocation command (/start).";
+    private static final String MESSAGE_CURRENCY_EXCHANGE    = "Please choose currency pair: ";
+    private static final String BOT_IS_NOT_AVAILABLE_MESSAGE = "Please start bot first via invocation command (/start).";
 
     private final SendBotMessageService sendBotMessageService;
 

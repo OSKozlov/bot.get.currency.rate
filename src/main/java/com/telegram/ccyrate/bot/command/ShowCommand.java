@@ -15,9 +15,9 @@ import java.util.Map;
  */
 public class ShowCommand implements Command {
 
-    private static final String MESSAGE_CURRENCY_EXCHANGE = "Rate for UAH/";
-
-    public static final String BOT_IS_NOT_AVAILABLE_MESSAGE = "Please start bot first via invocation command (/start).";
+    private static final String MESSAGE_CURRENCY_EXCHANGE     = "Rate for UAH/";
+    private static final String BOT_IS_NOT_AVAILABLE_MESSAGE  = "Please start bot first via invocation command (/start).";
+    private static final String CURRENCY_IS_NOT_FOUND_MESSAGE = "Currency is not found. Please provide another one.";
 
     private final SendBotMessageService sendBotMessageService;
 
@@ -40,8 +40,11 @@ public class ShowCommand implements Command {
         String ccy = retrieveDataFromMessage(update.hasMessage() ? update.getMessage().getText() : update.getCallbackQuery().getData());
         Map<String, UahToForeignCcyModel> map = rateService.getUahToForeignCcyRates();
         UahToForeignCcyModel model = map.get(ccy);
+        if (model == null) {
+            sendBotMessageService.sendMessage(chatId, CURRENCY_IS_NOT_FOUND_MESSAGE);
+            return;
+        }
         BigDecimal rate = model.getAmount();
-
         sendBotMessageService.sendMessage(chatId,MESSAGE_CURRENCY_EXCHANGE + ccy + ":" + StringUtils.SPACE
                 + rate.toString());
     }
