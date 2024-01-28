@@ -10,6 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.List;
@@ -43,6 +44,15 @@ public class SendBotMessageServiceImpl implements SendBotMessageService {
         sendMessage.setChatId(chatId);
         sendMessage.setText(message);
         sendMessage.setReplyMarkup(inlineKeyboardMarkup);
+        send(sendMessage);
+    }
+
+    @Override
+    public void sendReplyKeyBoardMessage(String chatId, String message, ReplyKeyboardMarkup replyKeyboardMarkup) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(chatId);
+        sendMessage.setText(message);
+        sendMessage.setReplyMarkup(replyKeyboardMarkup);
         send(sendMessage);
     }
 
