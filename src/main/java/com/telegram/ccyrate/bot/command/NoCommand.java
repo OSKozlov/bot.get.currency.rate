@@ -25,8 +25,12 @@ public class NoCommand implements Command {
 
     @Override
     public void execute(Update update) {
-        sendBotMessageService.sendReplyKeyBoardMessage(update.getMessage().getChatId().toString(),
-                NO_MESSAGE, createReplyKeyboard());
+
+        sendBotMessageService.sendMessage(update.getMessage().getChatId().toString(),
+                NO_MESSAGE);
+
+        /*sendBotMessageService.sendReplyKeyBoardMessage(update.getMessage().getChatId().toString(),
+                NO_MESSAGE, createReplyKeyboard());*/
     }
 
     private ReplyKeyboardMarkup createReplyKeyboard() {

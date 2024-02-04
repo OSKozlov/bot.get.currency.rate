@@ -50,11 +50,6 @@
 			<groupId>org.junit.platform</groupId>
 			<artifactId>junit-platform-commons</artifactId>
 		</dependency>
-        <dependency>
-            <groupId>com.google.collections</groupId>
-            <artifactId>google-collections</artifactId>
-            <version>16.0.1</version>
-        </dependency>
 
     </dependencies>
 
