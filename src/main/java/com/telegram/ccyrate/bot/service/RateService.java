@@ -10,4 +10,6 @@ public interface RateService {
 
     UahToForeignCcyModel getUahToForeignCccyRate(String foreignCcyCodeL);
 
+    String getServiceName();
+
 }

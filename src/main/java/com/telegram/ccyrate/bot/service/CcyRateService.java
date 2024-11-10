@@ -21,6 +21,8 @@ import java.util.stream.Collectors;
 @Service
 public class CcyRateService implements RateService {
 
+    public final static String CCY_RATE_SVC = "Ccy Rate Service";
+
     private final Logger logger = LoggerFactory.getLogger(CcyRateService.class);
 
     private BotConfig botConfig;
@@ -56,5 +58,10 @@ public class CcyRateService implements RateService {
     @Override
     public UahToForeignCcyModel getUahToForeignCccyRate(String foreignCcyCodeL) {
         return getUahToForeignCcyRates().get(foreignCcyCodeL);
+    }
+
+    @Override
+    public String getServiceName() {
+        return CCY_RATE_SVC;
     }
 }

@@ -1,6 +1,8 @@
 package com.telegram.ccyrate.bot.command;
 
 import com.telegram.ccyrate.bot.model.UahToForeignCcyModel;
+import com.telegram.ccyrate.bot.provider.ServiceLocator;
+import com.telegram.ccyrate.bot.service.CcyRateService;
 import com.telegram.ccyrate.bot.service.RateService;
 import com.telegram.ccyrate.bot.service.SendBotMessageService;
 import com.telegram.ccyrate.bot.state.BotStateMgr;
@@ -30,9 +32,9 @@ public class TopCcyListCommand implements Command {
 
     private final RateService rateService;
 
-    public TopCcyListCommand(SendBotMessageService sendBotMessageService, RateService rateService) {
+    public TopCcyListCommand(SendBotMessageService sendBotMessageService) {
         this.sendBotMessageService = sendBotMessageService;
-        this.rateService = rateService;
+        this.rateService = ServiceLocator.getService(CcyRateService.CCY_RATE_SVC);
     }
 
     @Override

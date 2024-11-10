@@ -19,12 +19,10 @@ public class CommandContainer {
         commandMap.put(STOP.getCommandName(), new StopCommand(sendBotMessageService));
         commandMap.put(HELP.getCommandName(), new HelpCommand(sendBotMessageService));
         commandMap.put(NO.getCommandName(), new NoCommand(sendBotMessageService));
-        commandMap.put(SHOW.getCommandName(), new ShowCommand(sendBotMessageService,
-                                              new CcyRateService()));
+        commandMap.put(SHOW.getCommandName(), new ShowCommand(sendBotMessageService));
         commandMap.put(CALLBACK.getCommandName(), new CallbackCommand(sendBotMessageService));
         commandMap.put(CREATEMENU.getCommandName(), new CreateMenuCommand(sendBotMessageService));
-        commandMap.put(TOPCCYLIST.getCommandName(), new TopCcyListCommand(sendBotMessageService,
-                new CcyRateService()));
+        commandMap.put(TOPCCYLIST.getCommandName(), new TopCcyListCommand(sendBotMessageService));
 
         unknownCommand = new UnknownCommand(sendBotMessageService);
     }
